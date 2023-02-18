@@ -1,4 +1,3 @@
-
 function fetchIngredient(_id) {
     fetch(`http://127.0.0.1:5000/ingredient/id/${_id}`)
         .then(response => response.json())
@@ -6,7 +5,6 @@ function fetchIngredient(_id) {
             $("#_id").val(ingredient._id);
             $("#name").val(ingredient.name);
             $("#price").val(ingredient.price);
-
         });
 }
 
@@ -27,8 +25,6 @@ function putIngredient(ingredient) {
     })
         .then(res => res.json())
         .then(res => showNotification());
-
-
 }
 
 /**
