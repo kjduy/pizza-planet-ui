@@ -7,10 +7,8 @@ function postIngredient(ingredient) {
             "Content-Type": "application/json; charset=utf-8",
         },
     })
-        .then(res => res.json())
-        .then(res => showNotification());
-
-
+    .then(res => res.json())
+    .then(res => showNotification());
 }
 
 /**

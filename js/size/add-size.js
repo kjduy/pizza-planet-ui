@@ -9,8 +9,6 @@ function postSize(size) {
     })
         .then(res => res.json())
         .then(res => showNotification());
-
-
 }
 
 /**
