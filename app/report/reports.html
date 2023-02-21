@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet" href="/css/styles.css" />
 
-    <title>L'ultima Cena Pizzeria! - Orders</title>
+    <title>L'ultima Cena Pizzeria! - Report</title>
   </head>
 
   <body>
@@ -42,13 +42,8 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Build Your Pizza!</a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/app/order/orders.html">Orders</a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="/app/beverage/beverages.html"
-              >Beverages</a
-            >
+            <a class="nav-link" href="/app/order/orders.html">Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/app/ingredient/ingredients.html"
@@ -59,6 +54,11 @@
             <a class="nav-link" href="/app/size/sizes.html">Sizes</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/app/beverage/beverages.html"
+              >Beverages</a
+            >
+          </li>
+          <li class="nav-item active">
             <a class="nav-link" href="/app/report/reports.html">Report</a>
           </li>
         </ul>
@@ -69,16 +69,14 @@
 
     <div class="container">
       <div class="jumbotron">
-        <div id="order-list">
-          <h2 class="text-center">Orders</h2>
-          <table id="orders" class="table bg-white table-bordered table-hover">
+        <div id="report-list">
+          <h2 class="text-center">Report</h2>
+          <table id="report" class="table bg-white table-bordered table-hover">
             <thead class="thead-dark">
               <tr class="d-flex">
-                <th class="col-3">Name</th>
-                <th class="col-2">DNI</th>
-                <th class="col-3">Address</th>
-                <th class="col-2 text-right">Total Sale</th>
-                <th class="col-2 text-center">Actions</th>
+                <th class="col-3 text-center">Most requested ingredient</th>
+                <th class="col-3 text-center">Month with more revenue</th>
+                <th class="col-6 text-center">Best customers</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -87,20 +85,45 @@
       </div>
     </div>
 
-    <template id="order-item-template">
+    <template id="report-template">
       <tr class="d-flex">
-        <td class="col-3">{{client_name}}</td>
-        <td class="col-2">{{client_dni}}</td>
-        <td class="col-3">{{client_address}}</td>
-        <td class="col-2 text-right">${{total_price}}</td>
-        <td class="col-2">
-          <div class="text-center">
-            <a
-              class="btn btn-success btn-sm view-order"
-              href="/app/order/order-detail.html?_id={{_id}}"
-              >View</a
+        <td class="col-3 text-center">
+          <p><span>{{most_requested_ingredient.name}}</span></p>
+          <p>
+            <span
+              ><strong>Total: </strong
+              >{{most_requested_ingredient.num_requested}}</span
             >
-          </div>
+          </p>
+        </td>
+        <td class="col-3 text-center">
+          <p>{{month_with_more_revenue.month}}</p>
+          <p>
+            <span
+              ><strong>Total revenue: </strong
+              >{{month_with_more_revenue.revenue}}</span
+            >
+          </p>
+        </td>
+        <td class="col-6">
+          {{#best_customers.customers}}
+          <p>
+            <span><strong>Name: </strong>{{client_name}}</span>
+          </p>
+          <p>
+            <span><strong>DNI: </strong>{{client_dni}}</span>
+          </p>
+          <p>
+            <span><strong>Address: </strong>{{client_address}}</span>
+          </p>
+          <p>
+            <span><strong>Phone: </strong>{{client_phone}}</span>
+          </p>
+          <p>
+            <span><strong>Total orders: </strong>{{num_orders}}</span>
+          </p>
+          <hr />
+          {{/best_customers.customers}}
         </td>
       </tr>
     </template>
@@ -128,6 +151,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="/js/order/orders.js"></script>
+    <script src="/js/report/report.js"></script>
   </body>
 </html>
