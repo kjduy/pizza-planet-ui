@@ -1,45 +1,42 @@
 function postBeverage(beverage) {
-
-    fetch('http://127.0.0.1:5000/beverage/', {
-        method: 'POST',
-        body: JSON.stringify(beverage),
-        headers: {
-            "Content-Type": "application/json; charset=utf-8",
-        },
-    })
-        .then(res => res.json())
-        .then(res => showNotification());
+  fetch("http://127.0.0.1:5000/beverage/", {
+    method: "POST",
+    body: JSON.stringify(beverage),
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => showNotification());
 }
 
 /**
-* Get the form and submit it with fetch API
-*/
+ * Get the form and submit it with fetch API
+ */
 let beverageForm = $("#beverage-form");
-beverageForm.submit(event => {
+beverageForm.submit((event) => {
+  let beverage = getBeverageData();
+  postBeverage(beverage);
 
-    let beverage = getBeverageData();
-    postBeverage(beverage);
-
-    event.preventDefault();
-    event.currentTarget.reset();
+  event.preventDefault();
+  event.currentTarget.reset();
 });
 
 /**
-* Gets the order data with JQuery
-*/
+ * Gets the order data with JQuery
+ */
 function getBeverageData() {
-
-    return {
-        name: $("input[name='name']").val(),
-        price: $("input[name='price']").val(),
-    };
+  return {
+    name: $("input[name='name']").val(),
+    price: $("input[name='price']").val(),
+  };
 }
 
 /**
-* Shows a notification when the order is accepted
-*/
+ * Shows a notification when the order is accepted
+ */
 function showNotification() {
-    let beverageAlert = $("#beverage-alert");
-    beverageAlert.toggle();
-    setTimeout(() => beverageAlert.toggle(), 5000);
+  let beverageAlert = $("#beverage-alert");
+  beverageAlert.toggle();
+  setTimeout(() => beverageAlert.toggle(), 5000);
 }
